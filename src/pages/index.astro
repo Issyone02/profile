@@ -1,11 +1,1865 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { projects } from "../data/projects";
+import "../styles/global.css";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olalere Isaiah | Software Developer &{" "} Automation Engineer</title>
+
+    <style>
+      :root {
+        --flip-duration: 1000ms;
+        --flip-ease: cubic-bezier(0.45, 0.05, 0.3, 1);
+        --page-alpha: 0.96;
+      }
+
+      body {
+        background: #05070f;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 120;
+        padding: 1rem 1rem 0.55rem;
+        background: linear-gradient(
+          to bottom,
+          rgba(5, 7, 15, 0.96),
+          rgba(5, 7, 15, 0.82),
+          rgba(5, 7, 15, 0.25)
+        );
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
+      .scene {
+        perspective: 2400px;
+      }
+
+      .book-open {
+        transform-style: preserve-3d;
+      }
+
+      .book-shadow {
+        position: absolute;
+        left: 8%;
+        right: 8%;
+        bottom: -30px;
+        height: 52px;
+        background: radial-gradient(
+          50% 50% at 50% 50%,
+          rgba(0, 0, 0, 0.52),
+          transparent 72%
+        );
+        filter: blur(18px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .static-left,
+      .static-right {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
+      }
+
+      .static-left {
+        left: 0;
+        z-index: 5;
+      }
+
+      .static-right {
+        right: 0;
+        z-index: 2;
+      }
+
+      .page-surface {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow:
+          0 24px 60px rgba(0, 0, 0, 0.34),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px) saturate(1.12);
+        -webkit-backdrop-filter: blur(20px) saturate(1.12);
+        background:
+          radial-gradient(
+            120% 120% at 20% 10%,
+            rgba(255, 255, 255, 0.07),
+            transparent 28%
+          ),
+          linear-gradient(
+            145deg,
+            rgba(8, 11, 23, var(--page-alpha)),
+            rgba(11, 18, 36, calc(var(--page-alpha) - 0.06))
+          );
+      }
+
+      .page-left {
+        border-radius: 30px 10px 10px 30px;
+        border-right: none;
+      }
+
+      .page-right {
+        border-radius: 10px 30px 30px 10px;
+        border-left: none;
+      }
+
+      .face-content {
+        position: relative;
+        z-index: 4;
+        height: 100%;
+        overflow: auto;
+      }
+
+      .gloss {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.48;
+        background: linear-gradient(
+          120deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.08) 18%,
+          transparent 34%,
+          rgba(255, 255, 255, 0.035) 52%,
+          transparent 68%,
+          rgba(255, 255, 255, 0.05) 88%,
+          transparent 100%
+        );
+      }
+
+      .shade {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        opacity: 0;
+        background: linear-gradient(
+          105deg,
+          rgba(0, 0, 0, 0.68) 0%,
+          rgba(0, 0, 0, 0.18) 28%,
+          rgba(255, 255, 255, 0.08) 50%,
+          rgba(0, 0, 0, 0.28) 72%,
+          rgba(0, 0, 0, 0.66) 100%
+        );
+      }
+
+      .center-shadow {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 52px;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .page-left .center-shadow {
+        right: 0;
+        background: linear-gradient(
+          to left,
+          rgba(0, 0, 0, 0.38),
+          rgba(255, 255, 255, 0.03) 28%,
+          transparent 78%
+        );
+      }
+
+      .page-right .center-shadow {
+        left: 0;
+        background: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.38),
+          rgba(255, 255, 255, 0.03) 28%,
+          transparent 78%
+        );
+      }
+
+      .outer-edge {
+        position: absolute;
+        top: 18px;
+        bottom: 18px;
+        width: 18px;
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.35;
+        background: repeating-linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.14) 0 1px,
+          transparent 1px 4px
+        );
+      }
+
+      .page-left .outer-edge {
+        left: 12px;
+        -webkit-mask-image: linear-gradient(to left, transparent, black);
+        mask-image: linear-gradient(to left, transparent, black);
+      }
+
+      .page-right .outer-edge {
+        right: 12px;
+        -webkit-mask-image: linear-gradient(to right, transparent, black);
+        mask-image: linear-gradient(to right, transparent, black);
+      }
+
+      .sheet {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 50%;
+        transform-origin: left center;
+        transform-style: preserve-3d;
+        transition: transform var(--flip-duration) var(--flip-ease);
+        will-change: transform;
+      }
+
+      .sheet.is-flipped {
+        transform: rotateY(-180deg);
+      }
+
+      .sheet.is-flipping-forward,
+      .sheet.is-flipping-backward {
+        pointer-events: none;
+      }
+
+      .sheet-face {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform-style: preserve-3d;
+      }
+
+      .sheet-face.back {
+        transform: rotateY(180deg);
+      }
+
+      .sheet.is-flipping-forward .front .shade {
+        animation: shade-front-forward var(--flip-duration) var(--flip-ease)
+          forwards;
+      }
+
+      .sheet.is-flipping-forward .back .shade {
+        animation: shade-back-forward var(--flip-duration) var(--flip-ease)
+          forwards;
+      }
+
+      .sheet.is-flipping-backward .front .shade {
+        animation: shade-front-backward var(--flip-duration) var(--flip-ease)
+          forwards;
+      }
+
+      .sheet.is-flipping-backward .back .shade {
+        animation: shade-back-backward var(--flip-duration) var(--flip-ease)
+          forwards;
+      }
+
+      @keyframes shade-front-forward {
+        0% {
+          opacity: 0;
+        }
+        45% {
+          opacity: 0.34;
+        }
+        100% {
+          opacity: 0.62;
+        }
+      }
+
+      @keyframes shade-back-forward {
+        0% {
+          opacity: 0.62;
+        }
+        55% {
+          opacity: 0.22;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes shade-front-backward {
+        0% {
+          opacity: 0.62;
+        }
+        55% {
+          opacity: 0.22;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes shade-back-backward {
+        0% {
+          opacity: 0;
+        }
+        45% {
+          opacity: 0.34;
+        }
+        100% {
+          opacity: 0.62;
+        }
+      }
+
+      .book-spine {
+        position: absolute;
+        left: 50%;
+        top: 1.5%;
+        bottom: 1.5%;
+        width: 58px;
+        transform: translateX(-50%);
+        z-index: 90;
+        pointer-events: none;
+        opacity: 0.72;
+        filter: blur(2px);
+        background: linear-gradient(
+          to right,
+          transparent 0%,
+          rgba(0, 0, 0, 0.34) 34%,
+          rgba(0, 0, 0, 0.52) 48%,
+          rgba(255, 255, 255, 0.06) 50%,
+          rgba(0, 0, 0, 0.52) 52%,
+          rgba(0, 0, 0, 0.34) 66%,
+          transparent 100%
+        );
+      }
+
+      .glass-panel {
+        background: rgba(8, 11, 23, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .nav-btn {
+        padding: 0.7rem 1rem;
+        border-radius: 9999px;
+        color: rgba(255, 255, 255, 0.72);
+        transition: all 180ms ease;
+        font-size: 0.92rem;
+        white-space: nowrap;
+      }
+
+      .nav-btn:hover {
+        color: white;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .nav-btn.active {
+        color: white;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .control-btn {
+        padding: 0.8rem 1.15rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.08);
+        transition: all 180ms ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .control-btn:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.14);
+      }
+
+      .control-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+
+      .pulse {
+        outline: 2px solid rgba(129, 140, 248, 0.72);
+        outline-offset: -2px;
+        transition: outline 180ms ease;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.45rem 0.75rem;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.72);
+        white-space: nowrap;
+      }
+
+      .contact-input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        outline: none;
+        transition: all 180ms ease;
+        resize: none;
+      }
+
+      .contact-input::placeholder {
+        color: rgba(255, 255, 255, 0.32);
+      }
+
+      .contact-input:focus {
+        border-color: rgba(129, 140, 248, 0.55);
+        box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.35);
+      }
+
+      .project-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 110;
+        display: none;
+      }
+
+      .project-modal.open {
+        display: block;
+      }
+
+      .modal-scroll-area {
+        position: relative;
+        z-index: 10;
+        height: 100%;
+        overflow-y: auto;
+        padding: 7rem 1rem 2.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .modal-scroll-area {
+          padding-top: 6rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :root {
+          --flip-duration: 1ms;
+        }
+      }
+
+      /* Profile picture hover effect */
+      .profile-hover {
+        --profile-hover-scale: 1.9;
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .profile-main-wrap {
+        position: relative;
+        z-index: 3;
+        transform-origin: center;
+        transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .profile-main {
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        box-shadow:
+          0 0 0 1px rgba(0, 0, 0, 0.08),
+          0 18px 45px rgba(0, 0, 0, 0.38);
+        transition:
+          box-shadow 600ms ease,
+          filter 600ms ease;
+      }
+
+      .profile-blur {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0;
+        transform: scale(1);
+        filter: blur(22px) saturate(1.15);
+        transition:
+          opacity 600ms ease,
+          transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        pointer-events: none;
+        border-radius: 1.75rem;
+      }
+
+      .profile-status {
+        position: absolute;
+        bottom: 6px;
+        right: 6px;
+        height: 14px;
+        width: 14px;
+        border-radius: 9999px;
+        background: #34d399;
+        border: 2px solid #0b1224;
+        z-index: 4;
+      }
+
+      .profile-hover:hover .profile-main-wrap,
+      .profile-hover:focus-visible .profile-main-wrap {
+        transform: scale(var(--profile-hover-scale));
+      }
+
+      .profile-hover:hover .profile-blur,
+      .profile-hover:focus-visible .profile-blur {
+        opacity: 0.72;
+        transform: scale(calc(var(--profile-hover-scale) + 0.16));
+      }
+
+      .profile-hover:hover .profile-main,
+      .profile-hover:focus-visible .profile-main {
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.18),
+          0 22px 55px rgba(0, 0, 0, 0.38),
+          0 0 22px rgba(99, 102, 241, 0.1);
+      }
+
+      .profile-hover:focus-visible {
+        outline: 2px solid rgba(129, 140, 248, 0.72);
+        outline-offset: 8px;
+        border-radius: 32px;
+      }
+
+      /* Allow the cover image to breathe a little more on larger screens */
+      @media (min-width: 768px) {
+        .static-left .page-surface,
+        .static-left .face-content {
+          overflow: visible;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen text-white overflow-x-hidden">
+    <!-- Decorative background -->
+    <div class="pointer-events-none fixed inset-0">
+      <div
+        class="absolute -top-32 -left-24 h-96 w-96 rounded-full bg-indigo-600/25 blur-[120px]"
+      ></div>
+      <div
+        class="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-emerald-500/15 blur-[140px]"
+      ></div>
+      <div
+        class="absolute top-1/3 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-purple-500/10 blur-[100px]"
+      ></div>
+    </div>
+
+    <!-- STATIC / STICKY NAVBAR -->
+    <header class="site-header">
+      <div
+        class="max-w-7xl mx-auto glass-panel rounded-3xl px-3 py-3 flex flex-wrap items-center justify-between gap-3"
+      >
+        <button
+          onclick="goToSection('home')"
+          class="flex items-center gap-3 px-3 py-2 rounded-2xl hover:bg-white/5 transition-colors"
+        >
+          <span
+            class="w-9 h-9 rounded-xl bg-white/10 border border-white/10 grid place-items-center text-sm font-bold"
+          >
+            OI
+          </span>
+          <span class="font-semibold hidden sm:block">Olalere Isaiah</span>
+        </button>
+
+        <nav class="flex flex-wrap gap-1">
+          <button class="nav-btn active" data-section="home">Home</button>
+          <button class="nav-btn" data-section="services">Services</button>
+          <button class="nav-btn" data-section="projects">Projects</button>
+          <button class="nav-btn" data-section="contact">Contact</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="relative z-10 px-4 pb-10 pt-3">
+      <div class="scene w-full max-w-7xl mx-auto">
+        <div class="relative">
+          <div class="book-shadow"></div>
+
+          <div
+            class="book-open relative aspect-[3/4] sm:aspect-[16/9] lg:aspect-[16/8]"
+          >
+            <!-- STATIC LEFT PAGE / COVER -->
+            <div class="static-left">
+              <div class="page-surface page-left">
+                <div class="gloss"></div>
+                <div class="center-shadow"></div>
+                <div class="outer-edge"></div>
+
+                <div
+                  class="face-content p-5 md:p-8 flex flex-col justify-between overflow-auto"
+                >
+                  <div class="flex items-start justify-between gap-4">
+                    <div
+                      class="w-11 h-11 rounded-2xl bg-white/10 border border-white/10 grid place-items-center text-xl"
+                    >
+                      ✦
+                    </div>
+
+                    <span
+                      class="px-3 py-1 rounded-full bg-emerald-400/15 border border-emerald-300/25 text-emerald-200 text-[10px] font-bold uppercase tracking-[0.18em]"
+                    >
+                      Available
+                    </span>
+                  </div>
+
+                  <div class="mt-8 md:mt-4">
+                    <!-- Display picture with hover expansion -->
+                    <div class="mb-5">
+                      <div
+                        class="profile-hover"
+                        tabindex="0"
+                        aria-label="Olalere Isaiah profile picture"
+                      >
+                        <!-- Blurred glow layer -->
+                        <img
+                          src="/profile.jpg"
+                          alt=""
+                          aria-hidden="true"
+                          onerror="
+                            this.src =
+                              'https://placehold.co/400x400/0b1224/ffffff?text=Olalere+Isaiah'
+                          "
+                          class="profile-blur h-20 w-20 md:h-24 md:w-24 object-cover object-top"
+                        />
+
+                        <!-- Main image -->
+                        <div class="profile-main-wrap">
+                          <img
+                            src="/profile.jpg"
+                            alt="Olalere Isaiah display picture"
+                            onerror="
+                              this.src =
+                                'https://placehold.co/400x400/0b1224/ffffff?text=Olalere+Isaiah'
+                            "
+                            class="profile-main h-40 w-40 md:h-40 md:w-40 rounded-[1.75rem] object-cover object-top"
+                          />
+
+                          <span class="profile-status"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p
+                      class="text-[11px] uppercase tracking-[0.3em] text-white/35 mb-3"
+                    >
+                      Portfolio Book
+                    </p>
+
+                    <h2 class="text-3xl md:text-4xl font-bold leading-tight">
+                      Olalere Isaiah
+                    </h2>
+
+                    <p class="text-white/55 mt-2">
+                      Software Developer & Automation Engineer
+                    </p>
+                  </div>
+
+                  <div
+                    class="p-4 rounded-3xl bg-white/[0.05] border border-white/10"
+                  >
+                    <p class="text-sm font-semibold text-emerald-200">
+                      Open to employment & consulting
+                    </p>
+                    <p class="text-sm text-white/55 mt-1">
+                      Software • Automation • Oil & Gas • Maintenance
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STATIC RIGHT BASE UNDER SHEETS -->
+            <div class="static-right">
+              <div class="page-surface page-right">
+                <div class="gloss"></div>
+                <div class="center-shadow"></div>
+                <div class="outer-edge"></div>
+
+                <div class="face-content grid place-items-center p-8">
+                  <p class="text-white/25 text-sm text-center">Book base</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- SHEET 1: HOME front / SERVICES back -->
+            <div class="sheet" data-sheet="0">
+              <div
+                class="sheet-face front page-surface page-right"
+                id="face-home"
+              >
+                <div class="gloss"></div>
+                <div class="shade"></div>
+                <div class="center-shadow"></div>
+                <div class="outer-edge"></div>
+
+                <div
+                  class="face-content p-5 md:p-8 flex flex-col justify-between overflow-auto"
+                >
+                  <div class="flex items-start justify-between gap-4">
+                    <div
+                      class="w-11 h-11 rounded-2xl bg-white/10 border border-white/10 grid place-items-center text-xl"
+                    >
+                      ✦
+                    </div>
+
+                    <span
+                      class="px-3 py-1 rounded-full bg-emerald-400/15 border border-emerald-300/25 text-emerald-200 text-[11px] font-bold uppercase tracking-[0.18em]"
+                    >
+                      Open to Work
+                    </span>
+                  </div>
+
+                  <div class="mt-8 md:mt-0">
+                    <p class="text-sm text-white/50 mb-3">Home</p>
+
+                    <h1
+                      class="text-3xl md:text-5xl font-bold leading-[1.04] tracking-tight"
+                    >
+                      Software Developer & { " "}
+                      <span class="text-indigo-200">Automation Engineer</span>
+                    </h1>
+
+                    <p class="mt-4 max-w-lg text-white/60">
+                      I am Olalere Isaiah — a passionate and intelligent
+											professional building web apps, mobile apps, management
+                      systems, and industrial automation solutions. I bridge
+                      software intelligence with real-world operations.
+                    </p>
+
+                    <div class="mt-5 flex flex-wrap gap-2">
+                      <span class="chip">Web Apps</span>
+                      <span class="chip">Mobile Apps</span>
+                      <span class="chip">Management Systems</span>
+                      <span class="chip">Industrial Automation</span>
+                      <span class="chip">Oil & Gas Support</span>
+                    </div>
+                  </div>
+
+                  <div class="mt-8 flex flex-wrap gap-3">
+                    <button
+                      onclick="goToSection('services')"
+                      class="px-5 py-3 rounded-2xl bg-white text-slate-950 font-semibold hover:bg-indigo-50 transition-colors"
+                    >
+                      View Services
+                    </button>
+
+                    <button
+                      onclick="goToSection('projects')"
+                      class="px-5 py-3 rounded-2xl border border-white/15 bg-white/10 hover:bg-white/15 transition-colors"
+                    >
+                      Projects
+                    </button>
+
+                    <button
+                      onclick="goToSection('contact')"
+                      class="px-5 py-3 rounded-2xl border border-white/15 bg-white/10 hover:bg-white/15 transition-colors"
+                    >
+                      Contact
+                    </button>
+                  </div>
+
+                  <div
+                    class="mt-6 text-[11px] uppercase tracking-[0.3em] text-white/25"
+                  >
+                    Page 01
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="sheet-face back page-surface page-left"
+                id="face-services"
+              >
+                <div class="gloss"></div>
+                <div class="shade"></div>
+                <div class="center-shadow"></div>
+                <div class="outer-edge"></div>
+
+                <div
+                  class="face-content p-5 md:p-8 flex flex-col overflow-auto"
+                >
+                  <div class="flex items-end justify-between gap-4 mb-6">
+                    <div>
+                      <p class="text-sm text-white/50 mb-2">What I offer</p>
+                      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                        Services
+                      </h2>
+                    </div>
+
+                    <span
+                      class="hidden md:inline-flex px-3 py-1 rounded-full bg-indigo-400/15 border border-indigo-300/25 text-indigo-200 text-[11px] font-bold uppercase tracking-[0.18em]"
+                    >
+                      Consultation
+                    </span>
+                  </div>
+
+                  <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
+                    <div
+                      class="p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] transition-colors"
+                    >
+                      <div class="text-2xl mb-2">💻</div>
+                      <h3 class="font-semibold mb-1">Software Development</h3>
+                      <p class="text-sm text-white/55">
+                        Web apps, mobile apps, school management systems,
+                        library management systems, personal portfolios, and
+                        static websites.
+                      </p>
+                    </div>
+
+                    <div
+                      class="p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] transition-colors"
+                    >
+                      <div class="text-2xl mb-2">⚙️</div>
+                      <h3 class="font-semibold mb-1">Automation Systems</h3>
+                      <p class="text-sm text-white/55">
+                        Car parking systems, auto flushing systems, traffic
+                        lighting systems, ESD systems, automatic tank filling
+                        systems, and tank control systems.
+                      </p>
+                    </div>
+
+                    <div
+                      class="p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] transition-colors"
+                    >
+                      <div class="text-2xl mb-2">🛢️</div>
+                      <h3 class="font-semibold mb-1">
+                        Industrial & Oil/Gas Support
+                      </h3>
+                      <p class="text-sm text-white/55">
+                        Installation of field devices, calibration, maintenance,
+                        and support for industrial environments.
+                      </p>
+                    </div>
+
+                    <div
+                      class="p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] transition-colors"
+                    >
+                      <div class="text-2xl mb-2">🧠</div>
+                      <h3 class="font-semibold mb-1">Consultation</h3>
+                      <p class="text-sm text-white/55">
+                        Technical consultation, system planning, and integration
+                        of software with industrial automation.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="mt-auto pt-6 text-[11px] uppercase tracking-[0.3em] text-white/25"
+                  >
+                    Page 02
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SHEET 2: PROJECTS front / CONTACT back -->
+            <div class="sheet" data-sheet="1">
+              <div
+                class="sheet-face front page-surface page-right"
+                id="face-projects"
+              >
+                <div class="gloss"></div>
+                <div class="shade"></div>
+                <div class="center-shadow"></div>
+                <div class="outer-edge"></div>
+
+                <div
+                  class="face-content p-5 md:p-8 flex flex-col overflow-auto"
+                >
+                  <div class="flex items-end justify-between gap-4 mb-6">
+                    <div>
+                      <p class="text-sm text-white/50 mb-2">Selected work</p>
+                      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                        Projects
+                      </h2>
+                    </div>
+
+                    <span
+                      class="hidden md:inline-flex px-3 py-1 rounded-full bg-emerald-400/15 border border-emerald-300/25 text-emerald-200 text-[11px] font-bold uppercase tracking-[0.18em]"
+                    >
+                      Click to view
+                    </span>
+                  </div>
+
+                  <div id="projectList" class="space-y-3"></div>
+
+                  <div
+                    class="mt-auto pt-6 text-[11px] uppercase tracking-[0.3em] text-white/25"
+                  >
+                    Page 03
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="sheet-face back page-surface page-left"
+                id="face-contact"
+              >
+                <div class="gloss"></div>
+                <div class="shade"></div>
+                <div class="center-shadow"></div>
+                <div class="outer-edge"></div>
+
+                <div
+                  class="face-content p-5 md:p-8 flex flex-col overflow-auto"
+                >
+                  <div class="flex items-end justify-between gap-4 mb-6">
+                    <div>
+                      <p class="text-sm text-white/50 mb-2">Availability</p>
+                      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                        Contact
+                      </h2>
+                    </div>
+
+                    <span
+                      class="hidden md:inline-flex px-3 py-1 rounded-full bg-emerald-400/15 border border-emerald-300/25 text-emerald-200 text-[11px] font-bold uppercase tracking-[0.18em]"
+                    >
+                      Open to Opportunities
+                    </span>
+                  </div>
+
+                  <form
+                    onsubmit="
+                      event.preventDefault();
+                      alert(
+                        'This contact form will be connected to Formspree, Getform, or another backend service later.',
+                      );
+                    "
+                    class="space-y-3 mb-4"
+                  >
+                    <input
+                      type="email"
+                      required
+                      placeholder="Your email address"
+                      class="contact-input"
+                    />
+
+                    <textarea
+                      rows="4"
+                      placeholder="What do you need? Consultation, software development, automation, maintenance..."
+                      class="contact-input"
+                    ></textarea>
+
+                    <button
+                      type="submit"
+                      class="w-full py-3 rounded-2xl bg-white text-slate-950 font-semibold hover:bg-indigo-50 transition-colors"
+                    >
+                      Send Message
+                    </button>
+                  </form>
+
+                  <div class="space-y-3">
+                    <a
+                      href="mailto:hello@yourdomain.com"
+                      class="flex items-center gap-3 p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] transition-colors"
+                    >
+                      <span class="text-xl">📧</span>
+                      <span class="text-sm font-medium"
+                        >hello@yourdomain.com</span
+                      >
+                    </a>
+
+                    <a
+                      href="#"
+                      class="flex items-center gap-3 p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] transition-colors"
+                    >
+                      <span class="text-xl">💼</span>
+                      <span class="text-sm font-medium">LinkedIn</span>
+                    </a>
+
+                    <a
+                      href="https://github.com/Issyone02"
+                      class="flex items-center gap-3 p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] transition-colors"
+                    >
+                      <span class="text-xl">🐙</span>
+                      <span class="text-sm font-medium">GitHub</span>
+                    </a>
+
+                    <a
+                      href="#"
+                      class="flex items-center gap-3 p-4 rounded-3xl bg-indigo-500/20 border border-indigo-500/30 hover:bg-indigo-500/30 transition-colors"
+                    >
+                      <span class="text-xl">📅</span>
+                      <span class="text-sm font-medium text-indigo-200"
+                        >Book a consultation</span
+                      >
+                    </a>
+                  </div>
+
+                  <div
+                    class="mt-auto pt-6 text-[11px] uppercase tracking-[0.3em] text-white/25"
+                  >
+                    Page 04
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SHEET 3: CLOSING PAGE -->
+            <div class="sheet" data-sheet="2">
+              <div class="sheet-face front page-surface page-right">
+                <div class="gloss"></div>
+                <div class="shade"></div>
+                <div class="center-shadow"></div>
+                <div class="outer-edge"></div>
+
+                <div
+                  class="face-content p-5 md:p-8 flex flex-col justify-between overflow-auto"
+                >
+                  <div>
+                    <p class="text-sm text-white/50 mb-3">Closing page</p>
+
+                    <h2
+                      class="text-3xl md:text-5xl font-bold leading-[1.05] tracking-tight"
+                    >
+                      Let’s integrate {" "}
+                      <span class="text-emerald-200"
+                        >software & automation.</span
+                      >
+                    </h2>
+
+                    <p class="mt-4 max-w-lg text-white/60">
+                      From web platforms and mobile apps to industrial control
+                      systems, field devices, calibration, and maintenance — I
+                      help connect digital systems with physical operations.
+                    </p>
+                  </div>
+
+                  <div class="mt-8">
+                    <p class="text-sm text-white/45 mb-3">
+                      Technologies & strengths
+                    </p>
+
+                    <div class="flex flex-wrap gap-2">
+                      <span class="chip">Next.js</span>
+                      <span class="chip">React Native</span>
+                      <span class="chip">Python</span>
+                      <span class="chip">Flask</span>
+                      <span class="chip">TypeScript</span>
+                      <span class="chip">JavaScript</span>
+                      <span class="chip">Tailwind CSS</span>
+                      <span class="chip">HTML</span>
+                      <span class="chip">CSS</span>
+                      <span class="chip">Field Devices</span>
+                      <span class="chip">Calibration</span>
+                      <span class="chip">Maintenance</span>
+                      <span class="chip">ESD Systems</span>
+                      <span class="chip">Tank Control</span>
+                    </div>
+                  </div>
+
+                  <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div
+                      class="p-4 rounded-3xl bg-white/[0.05] border border-white/10"
+                    >
+                      <p class="text-sm font-semibold text-emerald-200">
+                        Employment
+                      </p>
+                      <p class="text-sm text-white/55 mt-1">
+                        Open to full-time opportunities.
+                      </p>
+                    </div>
+
+                    <div
+                      class="p-4 rounded-3xl bg-white/[0.05] border border-white/10"
+                    >
+                      <p class="text-sm font-semibold text-indigo-200">
+                        Consulting
+                      </p>
+                      <p class="text-sm text-white/55 mt-1">
+                        Available for consultation and engagements.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="mt-auto pt-6 text-[11px] uppercase tracking-[0.3em] text-white/25"
+                  >
+                    Page 05
+                  </div>
+                </div>
+              </div>
+
+              <div class="sheet-face back page-surface page-left">
+                <div class="gloss"></div>
+                <div class="shade"></div>
+                <div class="center-shadow"></div>
+                <div class="outer-edge"></div>
+
+                <div class="face-content grid place-items-center p-8">
+                  <div class="text-center space-y-3 opacity-60">
+                    <div
+                      class="mx-auto w-12 h-12 rounded-2xl bg-white/10 border border-white/10 grid place-items-center text-xl"
+                    >
+                      ✦
+                    </div>
+                    <p class="text-sm uppercase tracking-[0.3em] text-white/45">
+                      Back Page
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spine overlay -->
+            <div class="book-spine"></div>
+          </div>
+
+          <!-- Prev / Next -->
+          <div class="mt-6 flex items-center justify-center gap-3">
+            <button id="prevBtn" onclick="prevSection()" class="control-btn">
+              ← Previous
+            </button>
+
+            <button id="nextBtn" onclick="nextSection()" class="control-btn">
+              Next →
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- PROJECT DETAIL VIEWER -->
+    <div id="projectModal" class="project-modal" aria-hidden="true">
+      <div
+        class="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        onclick="closeProjectModal()"
+      ></div>
+
+      <div id="projectModalScroll" class="modal-scroll-area">
+        <div class="max-w-6xl mx-auto glass-panel rounded-[2rem] p-5 md:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <button onclick="closeProjectModal()" class="control-btn">
+              ← Back to Book
+            </button>
+
+            <div class="flex flex-wrap gap-2">
+              <a
+                id="projectLiveLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="control-btn hidden"
+              >
+                Live Demo
+              </a>
+
+              <a
+                id="projectRepoLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="control-btn hidden"
+              >
+                GitHub Repo
+              </a>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-6">
+            <div>
+              <div
+                id="projectMediaMain"
+                class="aspect-video rounded-[2rem] overflow-hidden border border-white/10 bg-black/30"
+              ></div>
+
+              <div
+                id="projectThumbs"
+                class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
+              ></div>
+            </div>
+
+            <div>
+              <p id="projectCategory" class="text-sm text-white/50 mb-2"></p>
+
+              <h2
+                id="projectTitle"
+                class="text-3xl md:text-4xl font-bold tracking-tight"
+              ></h2>
+
+              <p
+                id="projectDescription"
+                class="mt-4 text-white/60 leading-relaxed"
+              ></p>
+
+              <div id="projectTags" class="mt-5 flex flex-wrap gap-2"></div>
+
+              <div
+                class="mt-8 p-5 rounded-3xl bg-white/[0.05] border border-white/10"
+              >
+                <p class="font-semibold">Need something similar?</p>
+                <p class="text-sm text-white/55 mt-1">
+                  Contact me for consultation, development, automation,
+                  installation, calibration, or maintenance.
+                </p>
+
+                <button
+                  onclick="
+                    closeProjectModal();
+                    goToSection('contact');
+                  "
+                  class="mt-4 px-5 py-3 rounded-2xl bg-white text-slate-950 font-semibold hover:bg-indigo-50 transition-colors"
+                >
+                  Contact Me
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const sampleVideo = "https://www.w3schools.com/html/mov_bbb.mp4";
+
+      function mediaPlaceholder(text, bg = "0b1224") {
+        return `https://placehold.co/1200x675/${bg}/ffffff?text=${encodeURIComponent(text)}`;
+      }
+
+      const projects = [
+        {
+          id: "school-management",
+          title: "School Management System",
+          category: "Software System",
+          summary:
+            "Web platform for school records, students, staff, and administration.",
+          description:
+            "A school management platform designed to handle student records, staff management, classes, attendance, results, and administrative workflows. The system can be adapted for small schools or larger institutions with role-based access.",
+          tags: ["Next.js", "TypeScript", "Tailwind CSS", "Database"],
+          liveUrl: "#",
+          repoUrl: "#",
+          media: [
+            {
+              type: "image",
+              src: "/school-dashboard.png",
+              alt: "School management dashboard",
+            },
+            {
+              type: "video",
+              src: "/School_mgt_sys.mp4",
+              poster: mediaPlaceholder("School System Demo", "111827"),
+            },
+            {
+              type: "image",
+              src: mediaPlaceholder("Student Records", "1e293b"),
+              alt: "Student records screen",
+            },
+          ],
+        },
+        {
+          id: "library-management",
+          title: "Library Management System",
+          category: "Software System",
+          summary:
+            "Cataloging, borrowing, search, and library operations management.",
+          description:
+            "A library management system for cataloging books, tracking borrowed items, managing returns, searching records, and supporting library staff operations.",
+          tags: ["Python", "Flask", "JavaScript", "CSS"],
+          liveUrl: "#",
+          repoUrl: "#",
+          media: [
+            {
+              type: "image",
+              src: mediaPlaceholder("Library Dashboard", "064e3b"),
+              alt: "Library management dashboard",
+            },
+            {
+              type: "video",
+              src: "/projects/library/LibraryDemo.mp4",
+              poster: mediaPlaceholder("Library Demo", "065f46"),
+            },
+            {
+              type: "image",
+              src: mediaPlaceholder("Book Catalog", "047857"),
+              alt: "Book catalog screen",
+            },
+          ],
+        },
+        {
+          id: "car-parking",
+          title: "Car Parking System",
+          category: "Automation System",
+          summary:
+            "Automated parking control using sensors and intelligent logic.",
+          description:
+            "An automated car parking solution using sensors, indicators, and control logic to manage parking space availability and improve vehicle flow.",
+          tags: [
+            "Automation",
+            "Sensors",
+            "Control Logic",
+            "Hardware Integration",
+          ],
+          liveUrl: "#",
+          repoUrl: "#",
+          media: [
+            {
+              type: "image",
+              src: mediaPlaceholder("Car Parking Layout", "7c2d12"),
+              alt: "Car parking system layout",
+            },
+            {
+              type: "video",
+              src: "/projects/car-parking/ParkingDemo.mp4",
+              poster: mediaPlaceholder("Parking Demo", "9a3412"),
+            },
+            {
+              type: "image",
+              src: mediaPlaceholder("Sensor Control", "c2410c"),
+              alt: "Parking sensor control",
+            },
+          ],
+        },
+        {
+          id: "traffic-lighting",
+          title: "Traffic Lighting System",
+          category: "Automation System",
+          summary: "Traffic light control system for safer road coordination.",
+          description:
+            "A traffic lighting control system designed to coordinate signals, improve road safety, and support timing logic for traffic flow management.",
+          tags: [
+            "Traffic Control",
+            "Timing Logic",
+            "Automation",
+            "Field Systems",
+          ],
+          liveUrl: "#",
+          repoUrl: "#",
+          media: [
+            {
+              type: "image",
+              src: mediaPlaceholder("Traffic Light Control", "1e3a8a"),
+              alt: "Traffic lighting control",
+            },
+            {
+              type: "video",
+              src: sampleVideo,
+              poster: mediaPlaceholder("Traffic Demo", "1d4ed8"),
+            },
+            {
+              type: "image",
+              src: mediaPlaceholder("Signal Timing", "2563eb"),
+              alt: "Signal timing diagram",
+            },
+          ],
+        },
+        {
+          id: "auto-flushing",
+          title: "Auto Flushing System",
+          category: "Automation System",
+          summary: "Automatic flushing system with sensor-based operation.",
+          description:
+            "An automatic flushing system built for efficiency and hygiene, using sensor-based triggering and controlled actuation.",
+          tags: ["Sensor Automation", "Control System", "Embedded Logic"],
+          liveUrl: "#",
+          repoUrl: "#",
+          media: [
+            {
+              type: "image",
+              src: mediaPlaceholder("Auto Flushing Unit", "3b0764"),
+              alt: "Auto flushing unit",
+            },
+            {
+              type: "video",
+              src: sampleVideo,
+              poster: mediaPlaceholder("Flushing Demo", "581c87"),
+            },
+            {
+              type: "image",
+              src: mediaPlaceholder("Sensor Module", "7e22ce"),
+              alt: "Sensor module",
+            },
+          ],
+        },
+        {
+    id: "static-websites",
+    title: "Static Websites",
+    category: "Software System",
+    summary: "Fast, SEO-friendly static websites for businesses and professionals.",
+    description:
+      "Modern static websites built with performance, accessibility, and clean design. Ideal for businesses, portfolios, and product landing pages.",
+    tags: ["HTML", "CSS", "JavaScript", "Astro", "Tailwind CSS", "SEO"],
+    liveUrl: "#",
+    repoUrl: "#",
+    media: [
+      {
+        type: "image",
+        src: mediaPlaceholder("Static Website", "0f172a"),
+        alt: "Static website preview",
+      },
+      {
+        type: "image",
+        src: mediaPlaceholder("Responsive Layout", "1e293b"),
+        alt: "Responsive layout preview",
+      },
+    ],
+  },
+  {
+    id: "dcs-system",
+    title: "Distributed Control System (DCS)",
+    category: "Industrial Automation",
+    summary: "DCS design, configuration, and support for industrial plants.",
+    description:
+      "Distributed Control System (DCS) support including configuration, HMI design, process control logic, alarm management, and integration for oil & gas and industrial plants.",
+    tags: ["DCS", "HMI", "Process Control", "SCADA", "Oil & Gas"],
+    liveUrl: "#",
+    repoUrl: "#",
+    media: [
+      {
+        type: "image",
+        src: mediaPlaceholder("DCS Control Room", "111827"),
+        alt: "DCS control system",
+      },
+      {
+        type: "image",
+        src: mediaPlaceholder("HMI Interface", "1f2937"),
+        alt: "DCS HMI interface",
+      },
+    ],
+  },
+  {
+    id: "sis-pcs-system",
+    title: "SIS / PCS Systems",
+    category: "Industrial Automation",
+    summary: "Safety Instrumented Systems and Process Control Systems.",
+    description:
+      "Design, installation, and support of Safety Instrumented Systems (SIS) and Process Control Systems (PCS) for safe and reliable plant operations.",
+    tags: ["SIS", "PCS", "PLC", "Safety Systems", "IEC 61511", "Oil & Gas"],
+    liveUrl: "#",
+    repoUrl: "#",
+    media: [
+      {
+        type: "image",
+        src: mediaPlaceholder("SIS Panel", "374151"),
+        alt: "Safety Instrumented System",
+      },
+      {
+        type: "image",
+        src: mediaPlaceholder("PCS Diagram", "4b5563"),
+        alt: "Process Control System",
+      },
+    ],
+  },
+        {
+          id: "tank-control",
+          title: "Automatic Tank Filling / ESD Control",
+          category: "Industrial Automation",
+          summary:
+            "Tank monitoring, automatic filling, ESD, and safety control.",
+          description:
+            "An industrial tank monitoring and automatic filling system with safety interlocks, control logic, ESD support, and field device integration.",
+          tags: ["Tank Control", "ESD", "Field Devices", "Oil & Gas"],
+          liveUrl: "#",
+          repoUrl: "#",
+          media: [
+            {
+              type: "image",
+              src: mediaPlaceholder("Tank Control Panel", "111827"),
+              alt: "Tank control panel",
+            },
+            {
+              type: "video",
+              src: sampleVideo,
+              poster: mediaPlaceholder("Tank System Demo", "1f2937"),
+            },
+            {
+              type: "image",
+              src: mediaPlaceholder("Field Devices", "374151"),
+              alt: "Field devices",
+            },
+          ],
+        },
+      ];
+
+      let currentProject = null;
+      let currentMediaIndex = 0;
+
+      const sheets = Array.from(document.querySelectorAll(".sheet"));
+      const navButtons = Array.from(document.querySelectorAll(".nav-btn"));
+
+      const sections = ["home", "services", "projects", "contact"];
+
+      const sectionToFlipped = {
+        home: 0,
+        services: 1,
+        projects: 1,
+        contact: 2,
+      };
+
+      const sectionFaceId = {
+        home: "face-home",
+        services: "face-services",
+        projects: "face-projects",
+        contact: "face-contact",
+      };
+
+      const maxFlipped = 2;
+
+      let flippedCount = 0;
+      let desiredFlipped = 0;
+      let activeSection = "home";
+      let isAnimating = false;
+
+      function getDuration() {
+        const value = getComputedStyle(document.documentElement)
+          .getPropertyValue("--flip-duration")
+          .trim();
+
+        return parseInt(value, 10) || 1000;
+      }
+
+      function setNav() {
+        navButtons.forEach((button) => {
+          button.classList.toggle(
+            "active",
+            button.dataset.section === activeSection,
+          );
+        });
+
+        const activeIndex = sections.indexOf(activeSection);
+        document.getElementById("prevBtn").disabled = activeIndex <= 0;
+        document.getElementById("nextBtn").disabled =
+          activeIndex >= sections.length - 1;
+      }
+
+      function renderStack() {
+        sheets.forEach((sheet, index) => {
+          if (index < flippedCount) {
+            sheet.classList.add("is-flipped");
+            sheet.style.zIndex = 20 + index;
+          } else {
+            sheet.classList.remove("is-flipped");
+            sheet.style.zIndex = 40 - index;
+          }
+        });
+      }
+
+      function pulse(section) {
+        const face = document.getElementById(sectionFaceId[section]);
+        if (!face) return;
+
+        face.classList.remove("pulse");
+        void face.offsetWidth;
+        face.classList.add("pulse");
+
+        setTimeout(() => {
+          face.classList.remove("pulse");
+        }, 1200);
+      }
+
+      function animateSheet(sheet, flipClass, onComplete) {
+        let finished = false;
+
+        const finish = () => {
+          if (finished) return;
+          finished = true;
+          sheet.classList.remove(flipClass);
+          onComplete();
+        };
+
+        const handler = (event) => {
+          if (event.target !== sheet || event.propertyName !== "transform") {
+            return;
+          }
+
+          sheet.removeEventListener("transitionend", handler);
+          finish();
+        };
+
+        sheet.addEventListener("transitionend", handler);
+        setTimeout(finish, getDuration() + 180);
+      }
+
+      function stepFlip() {
+        if (isAnimating) return;
+
+        if (flippedCount === desiredFlipped) {
+          pulse(activeSection);
+          return;
+        }
+
+        if (desiredFlipped > flippedCount) {
+          flipForwardStep();
+        } else {
+          flipBackwardStep();
+        }
+      }
+
+      function flipForwardStep() {
+        if (flippedCount >= sheets.length) return;
+
+        const sheet = sheets[flippedCount];
+
+        isAnimating = true;
+        sheet.classList.add("is-flipping-forward");
+        sheet.style.zIndex = 80;
+
+        void sheet.offsetWidth;
+
+        sheet.classList.add("is-flipped");
+
+        animateSheet(sheet, "is-flipping-forward", () => {
+          flippedCount += 1;
+          renderStack();
+          isAnimating = false;
+          stepFlip();
+        });
+      }
+
+      function flipBackwardStep() {
+        if (flippedCount <= 0) return;
+
+        const sheet = sheets[flippedCount - 1];
+
+        isAnimating = true;
+        sheet.classList.add("is-flipping-backward");
+        sheet.style.zIndex = 80;
+
+        void sheet.offsetWidth;
+
+        sheet.classList.remove("is-flipped");
+
+        animateSheet(sheet, "is-flipping-backward", () => {
+          flippedCount -= 1;
+          renderStack();
+          isAnimating = false;
+          stepFlip();
+        });
+      }
+
+      function requestFlip(target) {
+        desiredFlipped = Math.max(0, Math.min(maxFlipped, target));
+        stepFlip();
+      }
+
+      function goToSection(section) {
+        closeProjectModal();
+
+        activeSection = section;
+        setNav();
+        requestFlip(sectionToFlipped[section]);
+      }
+
+      function nextSection() {
+        const index = sections.indexOf(activeSection);
+        if (index < sections.length - 1) {
+          goToSection(sections[index + 1]);
+        }
+      }
+
+      function prevSection() {
+        const index = sections.indexOf(activeSection);
+        if (index > 0) {
+          goToSection(sections[index - 1]);
+        }
+      }
+
+      function renderProjectCards() {
+        const list = document.getElementById("projectList");
+        if (!list) return;
+
+        list.innerHTML = projects
+          .map((project) => {
+            const preview = project.media.find((item) => item.type === "image");
+
+            return `
+            <button
+              onclick="openProject('${project.id}')"
+              class="w-full text-left flex items-center gap-4 p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:border-indigo-500/30 hover:bg-white/[0.08] transition-colors"
+            >
+              <img
+                src="${preview ? preview.src : mediaPlaceholder(project.title)}"
+                alt="${project.title} preview"
+                class="w-14 h-14 rounded-2xl object-cover border border-white/10 shrink-0"
+              />
+
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-3">
+                  <h3 class="font-semibold">${project.title}</h3>
+                  <span class="text-indigo-200 shrink-0">→</span>
+                </div>
+
+                <p class="text-sm text-white/50 mt-1">
+                  ${project.summary}
+                </p>
+              </div>
+            </button>
+          `;
+          })
+          .join("");
+      }
+
+      function renderMainMedia() {
+        const main = document.getElementById("projectMediaMain");
+        if (!currentProject || !main) return;
+
+        const media = currentProject.media[currentMediaIndex];
+
+        if (!media) {
+          main.innerHTML = `
+          <div class="h-full w-full grid place-items-center text-white/35 text-sm">
+            No media available
+          </div>
+        `;
+          return;
+        }
+
+        if (media.type === "image") {
+          main.innerHTML = `
+          <img
+            src="${media.src}"
+            alt="${media.alt || currentProject.title}"
+            class="h-full w-full object-cover"
+          />
+        `;
+        } else {
+          main.innerHTML = `
+          <video
+            class="h-full w-full object-contain bg-black"
+            controls
+            preload="metadata"
+            poster="${media.poster || ""}"
+          >
+            <source src="${media.src}" type="video/mp4" />
+            Your browser does not support video playback.
+          </video>
+        `;
+        }
+      }
+
+      function renderThumbs() {
+        const thumbs = document.getElementById("projectThumbs");
+        if (!currentProject || !thumbs) return;
+
+        thumbs.innerHTML = currentProject.media
+          .map((media, index) => {
+            const isActive = index === currentMediaIndex;
+            const preview = media.type === "image" ? media.src : media.poster;
+
+            return `
+            <button
+              onclick="selectMedia(${index})"
+              class="relative aspect-video rounded-2xl overflow-hidden border transition-all ${
+                isActive
+                  ? "border-indigo-400 ring-2 ring-indigo-400/60"
+                  : "border-white/10 hover:border-white/30"
+              }"
+            >
+              <img
+                src="${preview || mediaPlaceholder("Media")}"
+                alt="Media thumbnail ${index + 1}"
+                class="h-full w-full object-cover"
+              />
+
+              ${
+                media.type === "video"
+                  ? `
+                    <span class="absolute inset-0 grid place-items-center bg-black/25">
+                      <span class="h-8 w-8 rounded-full bg-white/90 text-black grid place-items-center text-xs">
+                        ▶
+                      </span>
+                    </span>
+                  `
+                  : ""
+              }
+            </button>
+          `;
+          })
+          .join("");
+      }
+
+      function selectMedia(index) {
+        currentMediaIndex = index;
+        renderMainMedia();
+        renderThumbs();
+      }
+
+      function openProject(id) {
+        const project = projects.find((item) => item.id === id);
+        if (!project) return;
+
+        currentProject = project;
+        currentMediaIndex = 0;
+
+        document.getElementById("projectCategory").textContent =
+          project.category;
+        document.getElementById("projectTitle").textContent = project.title;
+        document.getElementById("projectDescription").textContent =
+          project.description;
+
+        document.getElementById("projectTags").innerHTML = project.tags
+          .map((tag) => `<span class="chip">${tag}</span>`)
+          .join("");
+
+        const liveLink = document.getElementById("projectLiveLink");
+        const repoLink = document.getElementById("projectRepoLink");
+
+        if (project.liveUrl && project.liveUrl !== "#") {
+          liveLink.href = project.liveUrl;
+          liveLink.classList.remove("hidden");
+        } else {
+          liveLink.classList.add("hidden");
+        }
+
+        if (project.repoUrl && project.repoUrl !== "#") {
+          repoLink.href = project.repoUrl;
+          repoLink.classList.remove("hidden");
+        } else {
+          repoLink.classList.add("hidden");
+        }
+
+        renderMainMedia();
+        renderThumbs();
+
+        const modal = document.getElementById("projectModal");
+        const scrollArea = document.getElementById("projectModalScroll");
+
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        scrollArea.scrollTop = 0;
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeProjectModal() {
+        const modal = document.getElementById("projectModal");
+        if (!modal.classList.contains("open")) return;
+
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+
+        document.getElementById("projectMediaMain").innerHTML = "";
+        document.body.style.overflow = "";
+      }
+
+      navButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          goToSection(button.dataset.section);
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeProjectModal();
+        }
+      });
+
+      window.goToSection = goToSection;
+      window.nextSection = nextSection;
+      window.prevSection = prevSection;
+      window.openProject = openProject;
+      window.closeProjectModal = closeProjectModal;
+      window.selectMedia = selectMedia;
+
+      renderProjectCards();
+      renderStack();
+      setNav();
+    </script>
+  </body>
+</html>
+
+    
