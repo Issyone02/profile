@@ -1696,13 +1696,24 @@ import "../styles/global.css";
         stepFlip();
       }
 
-      function goToSection(section) {
-        closeProjectModal();
+      const mobileQuery = window.matchMedia("(max-width: 640px)");
 
-        activeSection = section;
-        setNav();
-        requestFlip(sectionToFlipped[section]);
-      }
+function goToSection(section) {
+  closeProjectModal();
+  activeSection = section;
+  setNav();
+
+  if (mobileQuery.matches) {
+    const target = document.getElementById(sectionFaceId[section]);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    pulse(section);
+    return;
+  }
+
+  requestFlip(sectionToFlipped[section]);
+}
 
       function nextSection() {
         const index = sections.indexOf(activeSection);
