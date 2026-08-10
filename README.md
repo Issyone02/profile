@@ -1,46 +1,88 @@
-# Astro Starter Kit: Basics
+# Olalere Isaiah — Software Developer & Automation Engineer
 
-```sh
-npm create astro@latest -- --template basics
+🔗 **Live site:** https://issyone02.github.io/profile/
+
+An interactive personal portfolio built as a **two-page 3D book** that visitors can flip through. It showcases my work in software development and industrial automation, and makes it easy for employers and clients to contact me for employment, consultations, engagements, and maintenance.
+
+---
+
+## ✨ Features
+
+- 📖 Two-page open-book layout with realistic 3D page-flip animation
+- 🧊 Glassmorphism design with decorative cards and grids
+- 📌 Static/sticky navigation — tabs always accessible
+- 🖼️ Project viewer with images and demo videos
+- 🌟 Profile picture hover expansion with soft blur glow
+- 📱 Responsive layout
+- ⚡ Deployed automatically to GitHub Pages with GitHub Actions
+
+---
+
+## 🛠️ Tech Stack
+
+**Portfolio:**
+
+- Astro
+- Tailwind CSS
+- JavaScript / TypeScript
+- HTML / CSS
+- GitHub Actions (CI/CD)
+
+**My daily toolbox:**
+
+- Next.js • React Native • Python • Flask • TypeScript • JavaScript • Tailwind CSS
+- Industrial automation: DCS • SIS/PCS • ESD systems • Tank control • Field devices • Calibration
+
+---
+
+## 💼 What I Do
+
+- **Software Development** — web apps, mobile apps, school & library management systems, portfolios, static websites
+- **Automation Systems** — car parking systems, auto flushing systems, traffic lighting systems, automatic tank filling & tank control systems
+- **Industrial & Oil/Gas Support** — installation of field devices, calibration, and maintenance
+- **Consultation** — integrating software with industrial automation
+
+---
+
+## 🚀 Run Locally
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Then open `http://localhost:4321`.
 
-## 🚀 Project Structure
+## 📦 Build
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+npm run build
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Deployment to GitHub Pages happens automatically on every push to `main` via `.github/workflows/deploy.yml`.
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## 📁 Project Structure
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```txt
+├── public/            # Images, videos, and static assets
+├── src/
+│   ├── data/          # Project data
+│   ├── pages/         # Astro pages
+│   └── styles/        # Global CSS (Tailwind)
+├── .github/workflows/ # GitHub Pages deployment
+├── astro.config.mjs
+├── tailwind.config.js
+└── postcss.config.cjs
+```
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📬 Contact
+
+- **GitHub:** https://github.com/Issyone02
+- **Email:** (add your real email here)
+- **LinkedIn:** (add your LinkedIn link here)
+
+Open to employment, consulting, project engagements, and maintenance contracts.
