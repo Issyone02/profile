@@ -533,6 +533,65 @@ import "../styles/global.css";
           overflow: visible;
         }
       }
+
+      /* ===== MOBILE: single-page stacked layout ===== */
+@media (max-width: 640px) {
+  .book-open {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    transform-style: flat !important;
+  }
+
+  .book-shadow,
+  .book-spine,
+  .static-right,
+  .center-shadow,
+  .outer-edge,
+  .sheet[data-sheet="2"] .sheet-face.back {
+    display: none !important;
+  }
+
+  .static-left,
+  .sheet,
+  .sheet-face,
+  .static-left .page-surface {
+    position: relative !important;
+    inset: auto !important;
+    left: 0 !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  .sheet {
+    transition: none !important;
+    transform-style: flat !important;
+  }
+
+  .sheet-face,
+  .static-left .page-surface {
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+    height: auto !important;
+    min-height: 65vh;
+    border-radius: 24px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    scroll-margin-top: 90px;
+  }
+
+  .sheet-face {
+    margin-bottom: 1rem;
+  }
+
+  .static-left {
+    margin-bottom: 1rem;
+  }
+
+  .face-content {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
     </style>
   </head>
 
