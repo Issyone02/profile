@@ -1932,6 +1932,7 @@ function goToSection(section) {
         });
       });
 
+
       const profileHover = document.querySelector(".profile-hover");
 
       if (profile-hover) {
@@ -1939,9 +1940,10 @@ function goToSection(section) {
           profileHover.classList.toggle("is-enlarged");
         }};
 
+
       profileHover.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
+          event.preventDefault(;)
           profileHover.classList.toggel("is-enlarged");
         }
       });
