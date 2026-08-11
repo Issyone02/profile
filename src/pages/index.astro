@@ -501,23 +501,43 @@ import "../styles/global.css";
         z-index: 4;
       }
 
-      .profile-hover:hover .profile-main-wrap,
+      @media (hover:hover) {
+
+      .profile-hover:hover .profile-main-wrap {
+        transform: scale(var(--profile-hover-scale));
+      }
+
+      .profile-hover:hover .profile-blur {
+       opacity: 0.72;
+        transform: scale(calc(var(--profile-hover-scale) + 0.16));
+      }
+
+      .profile-hover:hover .profile-main {
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.18),
+          0 22px 55px rgba(0, 0, 0, 0.38),
+          0 0 22px rgba(99, 102, 241, 0.1);
+        }
+      }
+
+      /* click tap toggle (works on all devices) + keyboard focus */
+      .profile-hover.is-enlarged .profile-main-wrap,
       .profile-hover:focus-visible .profile-main-wrap {
         transform: scale(var(--profile-hover-scale));
       }
 
-      .profile-hover:hover .profile-blur,
+      .profile-hover.is-enlarged .profile-blur,
       .profile-hover:focus-visible .profile-blur {
         opacity: 0.72;
         transform: scale(calc(var(--profile-hover-scale) + 0.16));
       }
 
-      .profile-hover:hover .profile-main,
+      .profile-hover.is-enlarged .profile-main,
       .profile-hover:focus-visible .profile-main {
         box-shadow:
-          0 0 0 1px rgba(255, 255, 255, 0.18),
-          0 22px 55px rgba(0, 0, 0, 0.38),
-          0 0 22px rgba(99, 102, 241, 0.1);
+        0 0 0 1px rgba(244,255,255, 0.18),
+        0 22px 55px rgba(0,0,0, 0.38),
+        0 0 22px rgba(99, 102, 241, 0.1);
       }
 
       .profile-hover:focus-visible {
@@ -1911,6 +1931,22 @@ function goToSection(section) {
           goToSection(button.dataset.section);
         });
       });
+
+      const profileHover = document.querySelector(".profile-hover");
+
+      if (profile-hover) {
+        profile-Hover.addEventListener("click", ( => {
+          profileHover.classList.toggle("is-enlarged");
+        }};
+
+      profileHover.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          profileHover.classList.toggel("is-enlarged");
+        }
+      });
+      }
+      
 
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
