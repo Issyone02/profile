@@ -1935,16 +1935,16 @@ function goToSection(section) {
 
       const profileHover = document.querySelector(".profile-hover");
 
-      if (profile-hover) {
-        profile-Hover.addEventListener("click", ( => {
+      if (profileHover) {
+        profileHover.addEventListener("click", ( => {
           profileHover.classList.toggle("is-enlarged");
         }};
 
 
       profileHover.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault(;)
-          profileHover.classList.toggel("is-enlarged");
+          event.preventDefault();
+          profileHover.classList.toggle("is-enlarged");
         }
       });
       }
