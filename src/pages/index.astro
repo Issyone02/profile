@@ -800,7 +800,7 @@ import "../styles/global.css";
                     <h1
                       class="text-3xl md:text-5xl font-bold leading-[1.04] tracking-tight"
                     >
-                      Software Developer & { " "}
+                      Software Developer &{" "}
                       <span class="text-indigo-200">Automation Engineer</span>
                     </h1>
 
@@ -1295,677 +1295,674 @@ import "../styles/global.css";
     </div>
 
     <script>
-      const sampleVideo = "https://www.w3schools.com/html/mov_bbb.mp4";
+  const sampleVideo = "https://www.w3schools.com/html/mov_bbb.mp4";
 
-      function mediaPlaceholder(text, bg = "0b1224") {
-        return `https://placehold.co/1200x675/${bg}/ffffff?text=${encodeURIComponent(text)}`;
-      }
-
-      const projects = [
-        {
-          id: "school-management",
-          title: "School Management System",
-          category: "Software System",
-          summary:
-            "Web platform for school records, students, staff, and administration.",
-          description:
-            "A school management platform designed to handle student records, staff management, classes, attendance, results, and administrative workflows. The system can be adapted for small schools or larger institutions with role-based access.",
-          tags: ["Next.js", "TypeScript", "Tailwind CSS", "Database"],
-          liveUrl: "#",
-          repoUrl: "#",
-          media: [
-            {
-              type: "image",
-              src: "school-dashboard.png",
-              alt: "School management dashboard",
-            },
-            {
-              type: "video",
-              src: "School_mgt_sys.mp4",
-              poster: mediaPlaceholder("School System Demo", "111827"),
-            },
-            {
-              type: "image",
-              src: mediaPlaceholder("Student Records", "1e293b"),
-              alt: "Student records screen",
-            },
-          ],
-        },
-        {
-          id: "library-management",
-          title: "Library Management System",
-          category: "Software System",
-          summary:
-            "Cataloging, borrowing, search, and library operations management.",
-          description:
-            "A library management system for cataloging books, tracking borrowed items, managing returns, searching records, and supporting library staff operations.",
-          tags: ["Python", "Flask", "JavaScript", "CSS"],
-          liveUrl: "#",
-          repoUrl: "#",
-          media: [
-            {
-              type: "image",
-              src: mediaPlaceholder("Library Dashboard", "064e3b"),
-              alt: "Library management dashboard",
-            },
-            {
-              type: "video",
-              src: "projects/library/LibraryDemo.mp4",
-              poster: mediaPlaceholder("Library Demo", "065f46"),
-            },
-            {
-              type: "image",
-              src: mediaPlaceholder("Book Catalog", "047857"),
-              alt: "Book catalog screen",
-            },
-          ],
-        },
-        {
-          id: "car-parking",
-          title: "Car Parking System",
-          category: "Automation System",
-          summary:
-            "Automated parking control using sensors and intelligent logic.",
-          description:
-            "An automated car parking solution using sensors, indicators, and control logic to manage parking space availability and improve vehicle flow.",
-          tags: [
-            "Automation",
-            "Sensors",
-            "Control Logic",
-            "Hardware Integration",
-          ],
-          liveUrl: "#",
-          repoUrl: "#",
-          media: [
-            {
-              type: "image",
-              src: mediaPlaceholder("Car Parking Layout", "7c2d12"),
-              alt: "Car parking system layout",
-            },
-            {
-              type: "video",
-              src: "projects/car-parking/ParkingDemo.mp4",
-              poster: mediaPlaceholder("Parking Demo", "9a3412"),
-            },
-            {
-              type: "image",
-              src: mediaPlaceholder("Sensor Control", "c2410c"),
-              alt: "Parking sensor control",
-            },
-          ],
-        },
-        {
-          id: "traffic-lighting",
-          title: "Traffic Lighting System",
-          category: "Automation System",
-          summary: "Traffic light control system for safer road coordination.",
-          description:
-            "A traffic lighting control system designed to coordinate signals, improve road safety, and support timing logic for traffic flow management.",
-          tags: [
-            "Traffic Control",
-            "Timing Logic",
-            "Automation",
-            "Field Systems",
-          ],
-          liveUrl: "#",
-          repoUrl: "#",
-          media: [
-            {
-              type: "image",
-              src: mediaPlaceholder("Traffic Light Control", "1e3a8a"),
-              alt: "Traffic lighting control",
-            },
-            {
-              type: "video",
-              src: sampleVideo,
-              poster: mediaPlaceholder("Traffic Demo", "1d4ed8"),
-            },
-            {
-              type: "image",
-              src: mediaPlaceholder("Signal Timing", "2563eb"),
-              alt: "Signal timing diagram",
-            },
-          ],
-        },
-        {
-          id: "auto-flushing",
-          title: "Auto Flushing System",
-          category: "Automation System",
-          summary: "Automatic flushing system with sensor-based operation.",
-          description:
-            "An automatic flushing system built for efficiency and hygiene, using sensor-based triggering and controlled actuation.",
-          tags: ["Sensor Automation", "Control System", "Embedded Logic"],
-          liveUrl: "#",
-          repoUrl: "#",
-          media: [
-            {
-              type: "image",
-              src: mediaPlaceholder("Auto Flushing Unit", "3b0764"),
-              alt: "Auto flushing unit",
-            },
-            {
-              type: "video",
-              src: sampleVideo,
-              poster: mediaPlaceholder("Flushing Demo", "581c87"),
-            },
-            {
-              type: "image",
-              src: mediaPlaceholder("Sensor Module", "7e22ce"),
-              alt: "Sensor module",
-            },
-          ],
-        },
-        {
-    id: "static-websites",
-    title: "Static Websites",
-    category: "Software System",
-    summary: "Fast, SEO-friendly static websites for businesses and professionals.",
-    description:
-      "Modern static websites built with performance, accessibility, and clean design. Ideal for businesses, portfolios, and product landing pages.",
-    tags: ["HTML", "CSS", "JavaScript", "Astro", "Tailwind CSS", "SEO"],
-    liveUrl: "#",
-    repoUrl: "#",
-    media: [
-      {
-        type: "image",
-        src: mediaPlaceholder("Static Website", "0f172a"),
-        alt: "Static website preview",
-      },
-      {
-        type: "image",
-        src: mediaPlaceholder("Responsive Layout", "1e293b"),
-        alt: "Responsive layout preview",
-      },
-    ],
-  },
-  {
-    id: "dcs-system",
-    title: "Distributed Control System (DCS)",
-    category: "Industrial Automation",
-    summary: "DCS design, configuration, and support for industrial plants.",
-    description:
-      "Distributed Control System (DCS) support including configuration, HMI design, process control logic, alarm management, and integration for oil & gas and industrial plants.",
-    tags: ["DCS", "HMI", "Process Control", "SCADA", "Oil & Gas"],
-    liveUrl: "#",
-    repoUrl: "#",
-    media: [
-      {
-        type: "image",
-        src: mediaPlaceholder("DCS Control Room", "111827"),
-        alt: "DCS control system",
-      },
-      {
-        type: "image",
-        src: mediaPlaceholder("HMI Interface", "1f2937"),
-        alt: "DCS HMI interface",
-      },
-    ],
-  },
-  {
-    id: "sis-pcs-system",
-    title: "SIS / PCS Systems",
-    category: "Industrial Automation",
-    summary: "Safety Instrumented Systems and Process Control Systems.",
-    description:
-      "Design, installation, and support of Safety Instrumented Systems (SIS) and Process Control Systems (PCS) for safe and reliable plant operations.",
-    tags: ["SIS", "PCS", "PLC", "Safety Systems", "IEC 61511", "Oil & Gas"],
-    liveUrl: "#",
-    repoUrl: "#",
-    media: [
-      {
-        type: "image",
-        src: mediaPlaceholder("SIS Panel", "374151"),
-        alt: "Safety Instrumented System",
-      },
-      {
-        type: "image",
-        src: mediaPlaceholder("PCS Diagram", "4b5563"),
-        alt: "Process Control System",
-      },
-    ],
-  },
-        {
-          id: "tank-control",
-          title: "Automatic Tank Filling / ESD Control",
-          category: "Industrial Automation",
-          summary:
-            "Tank monitoring, automatic filling, ESD, and safety control.",
-          description:
-            "An industrial tank monitoring and automatic filling system with safety interlocks, control logic, ESD support, and field device integration.",
-          tags: ["Tank Control", "ESD", "Field Devices", "Oil & Gas"],
-          liveUrl: "#",
-          repoUrl: "#",
-          media: [
-            {
-              type: "image",
-              src: mediaPlaceholder("Tank Control Panel", "111827"),
-              alt: "Tank control panel",
-            },
-            {
-              type: "video",
-              src: sampleVideo,
-              poster: mediaPlaceholder("Tank System Demo", "1f2937"),
-            },
-            {
-              type: "image",
-              src: mediaPlaceholder("Field Devices", "374151"),
-              alt: "Field devices",
-            },
-          ],
-        },
-      ];
-
-      let currentProject = null;
-      let currentMediaIndex = 0;
-
-      const sheets = Array.from(document.querySelectorAll(".sheet"));
-      const navButtons = Array.from(document.querySelectorAll(".nav-btn"));
-
-      const sections = ["home", "services", "projects", "contact"];
-
-      const sectionToFlipped = {
-        home: 0,
-        services: 1,
-        projects: 1,
-        contact: 2,
-      };
-
-      const sectionFaceId = {
-        home: "face-home",
-        services: "face-services",
-        projects: "face-projects",
-        contact: "face-contact",
-      };
-
-      const maxFlipped = 2;
-
-      let flippedCount = 0;
-      let desiredFlipped = 0;
-      let activeSection = "home";
-      let isAnimating = false;
-
-      function getDuration() {
-        const value = getComputedStyle(document.documentElement)
-          .getPropertyValue("--flip-duration")
-          .trim();
-
-        return parseInt(value, 10) || 1000;
-      }
-
-      function setNav() {
-        navButtons.forEach((button) => {
-          button.classList.toggle(
-            "active",
-            button.dataset.section === activeSection,
-          );
-        });
-
-        const activeIndex = sections.indexOf(activeSection);
-        document.getElementById("prevBtn").disabled = activeIndex <= 0;
-        document.getElementById("nextBtn").disabled =
-          activeIndex >= sections.length - 1;
-      }
-
-      function renderStack() {
-        sheets.forEach((sheet, index) => {
-          if (index < flippedCount) {
-            sheet.classList.add("is-flipped");
-            sheet.style.zIndex = 20 + index;
-          } else {
-            sheet.classList.remove("is-flipped");
-            sheet.style.zIndex = 40 - index;
-          }
-        });
-      }
-
-      function pulse(section) {
-        const face = document.getElementById(sectionFaceId[section]);
-        if (!face) return;
-
-        face.classList.remove("pulse");
-        void face.offsetWidth;
-        face.classList.add("pulse");
-
-        setTimeout(() => {
-          face.classList.remove("pulse");
-        }, 1200);
-      }
-
-      function animateSheet(sheet, flipClass, onComplete) {
-        let finished = false;
-
-        const finish = () => {
-          if (finished) return;
-          finished = true;
-          sheet.classList.remove(flipClass);
-          onComplete();
-        };
-
-        const handler = (event) => {
-          if (event.target !== sheet || event.propertyName !== "transform") {
-            return;
-          }
-
-          sheet.removeEventListener("transitionend", handler);
-          finish();
-        };
-
-        sheet.addEventListener("transitionend", handler);
-        setTimeout(finish, getDuration() + 180);
-      }
-
-      function stepFlip() {
-        if (isAnimating) return;
-
-        if (flippedCount === desiredFlipped) {
-          pulse(activeSection);
-          return;
-        }
-
-        if (desiredFlipped > flippedCount) {
-          flipForwardStep();
-        } else {
-          flipBackwardStep();
-        }
-      }
-
-      function flipForwardStep() {
-        if (flippedCount >= sheets.length) return;
-
-        const sheet = sheets[flippedCount];
-
-        isAnimating = true;
-        sheet.classList.add("is-flipping-forward");
-        sheet.style.zIndex = 80;
-
-        void sheet.offsetWidth;
-
-        sheet.classList.add("is-flipped");
-
-        animateSheet(sheet, "is-flipping-forward", () => {
-          flippedCount += 1;
-          renderStack();
-          isAnimating = false;
-          stepFlip();
-        });
-      }
-
-      function flipBackwardStep() {
-        if (flippedCount <= 0) return;
-
-        const sheet = sheets[flippedCount - 1];
-
-        isAnimating = true;
-        sheet.classList.add("is-flipping-backward");
-        sheet.style.zIndex = 80;
-
-        void sheet.offsetWidth;
-
-        sheet.classList.remove("is-flipped");
-
-        animateSheet(sheet, "is-flipping-backward", () => {
-          flippedCount -= 1;
-          renderStack();
-          isAnimating = false;
-          stepFlip();
-        });
-      }
-
-      function requestFlip(target) {
-        desiredFlipped = Math.max(0, Math.min(maxFlipped, target));
-        stepFlip();
-      }
-
-      const mobileQuery = window.matchMedia("(max-width: 640px)");
-
-function goToSection(section) {
-  closeProjectModal();
-  activeSection = section;
-  setNav();
-
-  if (mobileQuery.matches) {
-    const target = document.getElementById(sectionFaceId[section]);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    pulse(section);
-    return;
+  function mediaPlaceholder(text, bg = "0b1224") {
+    return `https://placehold.co/1200x675/${bg}/ffffff?text=${encodeURIComponent(text)}`;
   }
 
-  requestFlip(sectionToFlipped[section]);
-}
+  const projects = [
+    {
+      id: "school-management",
+      title: "School Management System",
+      category: "Software System",
+      summary:
+        "Web platform for school records, students, staff, and administration.",
+      description:
+        "A school management platform designed to handle student records, staff management, classes, attendance, results, and administrative workflows. The system can be adapted for small schools or larger institutions with role-based access.",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Database"],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: "school-dashboard.png",
+          alt: "School management dashboard",
+        },
+        {
+          type: "video",
+          src: "School_mgt_sys.mp4",
+          poster: mediaPlaceholder("School System Demo", "111827"),
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("Student Records", "1e293b"),
+          alt: "Student records screen",
+        },
+      ],
+    },
+    {
+      id: "library-management",
+      title: "Library Management System",
+      category: "Software System",
+      summary:
+        "Cataloging, borrowing, search, and library operations management.",
+      description:
+        "A library management system for cataloging books, tracking borrowed items, managing returns, searching records, and supporting library staff operations.",
+      tags: ["Python", "Flask", "JavaScript", "CSS"],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: mediaPlaceholder("Library Dashboard", "064e3b"),
+          alt: "Library management dashboard",
+        },
+        {
+          type: "video",
+          src: "projects/library/LibraryDemo.mp4",
+          poster: mediaPlaceholder("Library Demo", "065f46"),
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("Book Catalog", "047857"),
+          alt: "Book catalog screen",
+        },
+      ],
+    },
+    {
+      id: "car-parking",
+      title: "Car Parking System",
+      category: "Automation System",
+      summary:
+        "Automated parking control using sensors and intelligent logic.",
+      description:
+        "An automated car parking solution using sensors, indicators, and control logic to manage parking space availability and improve vehicle flow.",
+      tags: [
+        "Automation",
+        "Sensors",
+        "Control Logic",
+        "Hardware Integration",
+      ],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: mediaPlaceholder("Car Parking Layout", "7c2d12"),
+          alt: "Car parking system layout",
+        },
+        {
+          type: "video",
+          src: "projects/car-parking/ParkingDemo.mp4",
+          poster: mediaPlaceholder("Parking Demo", "9a3412"),
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("Sensor Control", "c2410c"),
+          alt: "Parking sensor control",
+        },
+      ],
+    },
+    {
+      id: "traffic-lighting",
+      title: "Traffic Lighting System",
+      category: "Automation System",
+      summary: "Traffic light control system for safer road coordination.",
+      description:
+        "A traffic lighting control system designed to coordinate signals, improve road safety, and support timing logic for traffic flow management.",
+      tags: [
+        "Traffic Control",
+        "Timing Logic",
+        "Automation",
+        "Field Systems",
+      ],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: mediaPlaceholder("Traffic Light Control", "1e3a8a"),
+          alt: "Traffic lighting control",
+        },
+        {
+          type: "video",
+          src: sampleVideo,
+          poster: mediaPlaceholder("Traffic Demo", "1d4ed8"),
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("Signal Timing", "2563eb"),
+          alt: "Signal timing diagram",
+        },
+      ],
+    },
+    {
+      id: "auto-flushing",
+      title: "Auto Flushing System",
+      category: "Automation System",
+      summary: "Automatic flushing system with sensor-based operation.",
+      description:
+        "An automatic flushing system built for efficiency and hygiene, using sensor-based triggering and controlled actuation.",
+      tags: ["Sensor Automation", "Control System", "Embedded Logic"],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: mediaPlaceholder("Auto Flushing Unit", "3b0764"),
+          alt: "Auto flushing unit",
+        },
+        {
+          type: "video",
+          src: sampleVideo,
+          poster: mediaPlaceholder("Flushing Demo", "581c87"),
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("Sensor Module", "7e22ce"),
+          alt: "Sensor module",
+        },
+      ],
+    },
+    {
+      id: "tank-control",
+      title: "Automatic Tank Filling / ESD Control",
+      category: "Industrial Automation",
+      summary:
+        "Tank monitoring, automatic filling, ESD, and safety control.",
+      description:
+        "An industrial tank monitoring and automatic filling system with safety interlocks, control logic, ESD support, and field device integration.",
+      tags: ["Tank Control", "ESD", "Field Devices", "Oil & Gas"],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: mediaPlaceholder("Tank Control Panel", "111827"),
+          alt: "Tank control panel",
+        },
+        {
+          type: "video",
+          src: sampleVideo,
+          poster: mediaPlaceholder("Tank System Demo", "1f2937"),
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("Field Devices", "374151"),
+          alt: "Field devices",
+        },
+      ],
+    },
+    {
+      id: "static-websites",
+      title: "Static Websites",
+      category: "Software System",
+      summary: "Fast, SEO-friendly static websites for businesses and professionals.",
+      description:
+        "Modern static websites built with performance, accessibility, and clean design. Ideal for businesses, portfolios, and product landing pages.",
+      tags: ["HTML", "CSS", "JavaScript", "Astro", "Tailwind CSS", "SEO"],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: mediaPlaceholder("Static Website", "0f172a"),
+          alt: "Static website preview",
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("Responsive Layout", "1e293b"),
+          alt: "Responsive layout preview",
+        },
+      ],
+    },
+    {
+      id: "dcs-system",
+      title: "Distributed Control System (DCS)",
+      category: "Industrial Automation",
+      summary: "DCS design, configuration, and support for industrial plants.",
+      description:
+        "Distributed Control System (DCS) support including configuration, HMI design, process control logic, alarm management, and integration for oil & gas and industrial plants.",
+      tags: ["DCS", "HMI", "Process Control", "SCADA", "Oil & Gas"],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: mediaPlaceholder("DCS Control Room", "111827"),
+          alt: "DCS control system",
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("HMI Interface", "1f2937"),
+          alt: "DCS HMI interface",
+        },
+      ],
+    },
+    {
+      id: "sis-pcs-system",
+      title: "SIS / PCS Systems",
+      category: "Industrial Automation",
+      summary: "Safety Instrumented Systems and Process Control Systems.",
+      description:
+        "Design, installation, and support of Safety Instrumented Systems (SIS) and Process Control Systems (PCS) for safe and reliable plant operations.",
+      tags: ["SIS", "PCS", "PLC", "Safety Systems", "IEC 61511", "Oil & Gas"],
+      liveUrl: "#",
+      repoUrl: "#",
+      media: [
+        {
+          type: "image",
+          src: mediaPlaceholder("SIS Panel", "374151"),
+          alt: "Safety Instrumented System",
+        },
+        {
+          type: "image",
+          src: mediaPlaceholder("PCS Diagram", "4b5563"),
+          alt: "Process Control System",
+        },
+      ],
+    },
+  ];
 
-      function nextSection() {
-        const index = sections.indexOf(activeSection);
-        if (index < sections.length - 1) {
-          goToSection(sections[index + 1]);
-        }
+  let currentProject = null;
+  let currentMediaIndex = 0;
+
+  const sheets = Array.from(document.querySelectorAll(".sheet"));
+  const navButtons = Array.from(document.querySelectorAll(".nav-btn"));
+
+  const sections = ["home", "services", "projects", "contact"];
+
+  const sectionToFlipped = {
+    home: 0,
+    services: 1,
+    projects: 1,
+    contact: 2,
+  };
+
+  const sectionFaceId = {
+    home: "face-home",
+    services: "face-services",
+    projects: "face-projects",
+    contact: "face-contact",
+  };
+
+  const maxFlipped = 2;
+
+  let flippedCount = 0;
+  let desiredFlipped = 0;
+  let activeSection = "home";
+  let isAnimating = false;
+
+  function getDuration() {
+    const value = getComputedStyle(document.documentElement)
+      .getPropertyValue("--flip-duration")
+      .trim();
+
+    return parseInt(value, 10) || 1000;
+  }
+
+  function setNav() {
+    navButtons.forEach((button) => {
+      button.classList.toggle(
+        "active",
+        button.dataset.section === activeSection,
+      );
+    });
+
+    const activeIndex = sections.indexOf(activeSection);
+    document.getElementById("prevBtn").disabled = activeIndex <= 0;
+    document.getElementById("nextBtn").disabled =
+      activeIndex >= sections.length - 1;
+  }
+
+  function renderStack() {
+    sheets.forEach((sheet, index) => {
+      if (index < flippedCount) {
+        sheet.classList.add("is-flipped");
+        sheet.style.zIndex = 20 + index;
+      } else {
+        sheet.classList.remove("is-flipped");
+        sheet.style.zIndex = 40 - index;
+      }
+    });
+  }
+
+  function pulse(section) {
+    const face = document.getElementById(sectionFaceId[section]);
+    if (!face) return;
+
+    face.classList.remove("pulse");
+    void face.offsetWidth;
+    face.classList.add("pulse");
+
+    setTimeout(() => {
+      face.classList.remove("pulse");
+    }, 1200);
+  }
+
+  function animateSheet(sheet, flipClass, onComplete) {
+    let finished = false;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      sheet.classList.remove(flipClass);
+      onComplete();
+    };
+
+    const handler = (event) => {
+      if (event.target !== sheet || event.propertyName !== "transform") {
+        return;
       }
 
-      function prevSection() {
-        const index = sections.indexOf(activeSection);
-        if (index > 0) {
-          goToSection(sections[index - 1]);
-        }
+      sheet.removeEventListener("transitionend", handler);
+      finish();
+    };
+
+    sheet.addEventListener("transitionend", handler);
+    setTimeout(finish, getDuration() + 180);
+  }
+
+  function stepFlip() {
+    if (isAnimating) return;
+
+    if (flippedCount === desiredFlipped) {
+      pulse(activeSection);
+      return;
+    }
+
+    if (desiredFlipped > flippedCount) {
+      flipForwardStep();
+    } else {
+      flipBackwardStep();
+    }
+  }
+
+  function flipForwardStep() {
+    if (flippedCount >= sheets.length) return;
+
+    const sheet = sheets[flippedCount];
+
+    isAnimating = true;
+    sheet.classList.add("is-flipping-forward");
+    sheet.style.zIndex = 80;
+
+    void sheet.offsetWidth;
+
+    sheet.classList.add("is-flipped");
+
+    animateSheet(sheet, "is-flipping-forward", () => {
+      flippedCount += 1;
+      renderStack();
+      isAnimating = false;
+      stepFlip();
+    });
+  }
+
+  function flipBackwardStep() {
+    if (flippedCount <= 0) return;
+
+    const sheet = sheets[flippedCount - 1];
+
+    isAnimating = true;
+    sheet.classList.add("is-flipping-backward");
+    sheet.style.zIndex = 80;
+
+    void sheet.offsetWidth;
+
+    sheet.classList.remove("is-flipped");
+
+    animateSheet(sheet, "is-flipping-backward", () => {
+      flippedCount -= 1;
+      renderStack();
+      isAnimating = false;
+      stepFlip();
+    });
+  }
+
+  function requestFlip(target) {
+    desiredFlipped = Math.max(0, Math.min(maxFlipped, target));
+    stepFlip();
+  }
+
+  const mobileQuery = window.matchMedia("(max-width: 640px)");
+
+  function goToSection(section) {
+    closeProjectModal();
+    activeSection = section;
+    setNav();
+
+    if (mobileQuery.matches) {
+      const target = document.getElementById(sectionFaceId[section]);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+      pulse(section);
+      return;
+    }
 
-      function renderProjectCards() {
-        const list = document.getElementById("projectList");
-        if (!list) return;
+    requestFlip(sectionToFlipped[section]);
+  }
 
-        list.innerHTML = projects
-          .map((project) => {
-            const preview = project.media.find((item) => item.type === "image");
+  function nextSection() {
+    const index = sections.indexOf(activeSection);
+    if (index < sections.length - 1) {
+      goToSection(sections[index + 1]);
+    }
+  }
 
-            return `
-            <button
-              onclick="openProject('${project.id}')"
-              class="w-full text-left flex items-center gap-4 p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:border-indigo-500/30 hover:bg-white/[0.08] transition-colors"
-            >
-              <img
-                src="${preview ? preview.src : mediaPlaceholder(project.title)}"
-                alt="${project.title} preview"
-                class="w-14 h-14 rounded-2xl object-cover border border-white/10 shrink-0"
-              />
+  function prevSection() {
+    const index = sections.indexOf(activeSection);
+    if (index > 0) {
+      goToSection(sections[index - 1]);
+    }
+  }
 
-              <div class="min-w-0 flex-1">
-                <div class="flex items-center justify-between gap-3">
-                  <h3 class="font-semibold">${project.title}</h3>
-                  <span class="text-indigo-200 shrink-0">→</span>
-                </div>
+  function renderProjectCards() {
+    const list = document.getElementById("projectList");
+    if (!list) return;
 
-                <p class="text-sm text-white/50 mt-1">
-                  ${project.summary}
-                </p>
-              </div>
-            </button>
-          `;
-          })
-          .join("");
-      }
+    list.innerHTML = projects
+      .map((project) => {
+        const preview = project.media.find((item) => item.type === "image");
 
-      function renderMainMedia() {
-        const main = document.getElementById("projectMediaMain");
-        if (!currentProject || !main) return;
-
-        const media = currentProject.media[currentMediaIndex];
-
-        if (!media) {
-          main.innerHTML = `
-          <div class="h-full w-full grid place-items-center text-white/35 text-sm">
-            No media available
-          </div>
-        `;
-          return;
-        }
-
-        if (media.type === "image") {
-          main.innerHTML = `
+        return `
+        <button
+          onclick="openProject('${project.id}')"
+          class="w-full text-left flex items-center gap-4 p-4 rounded-3xl bg-white/[0.05] border border-white/10 hover:border-indigo-500/30 hover:bg-white/[0.08] transition-colors"
+        >
           <img
-            src="${media.src}"
-            alt="${media.alt || currentProject.title}"
+            src="${preview ? preview.src : mediaPlaceholder(project.title)}"
+            alt="${project.title} preview"
+            class="w-14 h-14 rounded-2xl object-cover border border-white/10 shrink-0"
+          />
+
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="font-semibold">${project.title}</h3>
+              <span class="text-indigo-200 shrink-0">→</span>
+            </div>
+
+            <p class="text-sm text-white/50 mt-1">
+              ${project.summary}
+            </p>
+          </div>
+        </button>
+      `;
+      })
+      .join("");
+  }
+
+  function renderMainMedia() {
+    const main = document.getElementById("projectMediaMain");
+    if (!currentProject || !main) return;
+
+    const media = currentProject.media[currentMediaIndex];
+
+    if (!media) {
+      main.innerHTML = `
+      <div class="h-full w-full grid place-items-center text-white/35 text-sm">
+        No media available
+      </div>
+    `;
+      return;
+    }
+
+    if (media.type === "image") {
+      main.innerHTML = `
+      <img
+        src="${media.src}"
+        alt="${media.alt || currentProject.title}"
+        class="h-full w-full object-cover"
+      />
+    `;
+    } else {
+      main.innerHTML = `
+      <video
+        class="h-full w-full object-contain bg-black"
+        controls
+        preload="metadata"
+        poster="${media.poster || ""}"
+      >
+        <source src="${media.src}" type="video/mp4" />
+        Your browser does not support video playback.
+      </video>
+    `;
+    }
+  }
+
+  function renderThumbs() {
+    const thumbs = document.getElementById("projectThumbs");
+    if (!currentProject || !thumbs) return;
+
+    thumbs.innerHTML = currentProject.media
+      .map((media, index) => {
+        const isActive = index === currentMediaIndex;
+        const preview = media.type === "image" ? media.src : media.poster;
+
+        return `
+        <button
+          onclick="selectMedia(${index})"
+          class="relative aspect-video rounded-2xl overflow-hidden border transition-all ${
+            isActive
+              ? "border-indigo-400 ring-2 ring-indigo-400/60"
+              : "border-white/10 hover:border-white/30"
+          }"
+        >
+          <img
+            src="${preview || mediaPlaceholder("Media")}"
+            alt="Media thumbnail ${index + 1}"
             class="h-full w-full object-cover"
           />
-        `;
-        } else {
-          main.innerHTML = `
-          <video
-            class="h-full w-full object-contain bg-black"
-            controls
-            preload="metadata"
-            poster="${media.poster || ""}"
-          >
-            <source src="${media.src}" type="video/mp4" />
-            Your browser does not support video playback.
-          </video>
-        `;
-        }
+
+          ${
+            media.type === "video"
+              ? `
+                <span class="absolute inset-0 grid place-items-center bg-black/25">
+                  <span class="h-8 w-8 rounded-full bg-white/90 text-black grid place-items-center text-xs">
+                    ▶
+                  </span>
+                </span>
+              `
+              : ""
+          }
+        </button>
+      `;
+      })
+      .join("");
+  }
+
+  function selectMedia(index) {
+    currentMediaIndex = index;
+    renderMainMedia();
+    renderThumbs();
+  }
+
+  function openProject(id) {
+    const project = projects.find((item) => item.id === id);
+    if (!project) return;
+
+    currentProject = project;
+    currentMediaIndex = 0;
+
+    document.getElementById("projectCategory").textContent =
+      project.category;
+    document.getElementById("projectTitle").textContent = project.title;
+    document.getElementById("projectDescription").textContent =
+      project.description;
+
+    document.getElementById("projectTags").innerHTML = project.tags
+      .map((tag) => `<span class="chip">${tag}</span>`)
+      .join("");
+
+    const liveLink = document.getElementById("projectLiveLink");
+    const repoLink = document.getElementById("projectRepoLink");
+
+    if (project.liveUrl && project.liveUrl !== "#") {
+      liveLink.href = project.liveUrl;
+      liveLink.classList.remove("hidden");
+    } else {
+      liveLink.classList.add("hidden");
+    }
+
+    if (project.repoUrl && project.repoUrl !== "#") {
+      repoLink.href = project.repoUrl;
+      repoLink.classList.remove("hidden");
+    } else {
+      repoLink.classList.add("hidden");
+    }
+
+    renderMainMedia();
+    renderThumbs();
+
+    const modal = document.getElementById("projectModal");
+    const scrollArea = document.getElementById("projectModalScroll");
+
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    scrollArea.scrollTop = 0;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeProjectModal() {
+    const modal = document.getElementById("projectModal");
+    if (!modal.classList.contains("open")) return;
+
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+
+    document.getElementById("projectMediaMain").innerHTML = "";
+    document.body.style.overflow = "";
+  }
+
+  navButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      goToSection(button.dataset.section);
+    });
+  });
+
+  const profileHover = document.querySelector(".profile-hover");
+
+  if (profileHover) {
+    profileHover.addEventListener("click", () => {
+      profileHover.classList.toggle("is-enlarged");
+    });
+
+    profileHover.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        profileHover.classList.toggle("is-enlarged");
       }
+    });
+  }
 
-      function renderThumbs() {
-        const thumbs = document.getElementById("projectThumbs");
-        if (!currentProject || !thumbs) return;
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeProjectModal();
+    }
+  });
 
-        thumbs.innerHTML = currentProject.media
-          .map((media, index) => {
-            const isActive = index === currentMediaIndex;
-            const preview = media.type === "image" ? media.src : media.poster;
+  window.goToSection = goToSection;
+  window.nextSection = nextSection;
+  window.prevSection = prevSection;
+  window.openProject = openProject;
+  window.closeProjectModal = closeProjectModal;
+  window.selectMedia = selectMedia;
 
-            return `
-            <button
-              onclick="selectMedia(${index})"
-              class="relative aspect-video rounded-2xl overflow-hidden border transition-all ${
-                isActive
-                  ? "border-indigo-400 ring-2 ring-indigo-400/60"
-                  : "border-white/10 hover:border-white/30"
-              }"
-            >
-              <img
-                src="${preview || mediaPlaceholder("Media")}"
-                alt="Media thumbnail ${index + 1}"
-                class="h-full w-full object-cover"
-              />
-
-              ${
-                media.type === "video"
-                  ? `
-                    <span class="absolute inset-0 grid place-items-center bg-black/25">
-                      <span class="h-8 w-8 rounded-full bg-white/90 text-black grid place-items-center text-xs">
-                        ▶
-                      </span>
-                    </span>
-                  `
-                  : ""
-              }
-            </button>
-          `;
-          })
-          .join("");
-      }
-
-      function selectMedia(index) {
-        currentMediaIndex = index;
-        renderMainMedia();
-        renderThumbs();
-      }
-
-      function openProject(id) {
-        const project = projects.find((item) => item.id === id);
-        if (!project) return;
-
-        currentProject = project;
-        currentMediaIndex = 0;
-
-        document.getElementById("projectCategory").textContent =
-          project.category;
-        document.getElementById("projectTitle").textContent = project.title;
-        document.getElementById("projectDescription").textContent =
-          project.description;
-
-        document.getElementById("projectTags").innerHTML = project.tags
-          .map((tag) => `<span class="chip">${tag}</span>`)
-          .join("");
-
-        const liveLink = document.getElementById("projectLiveLink");
-        const repoLink = document.getElementById("projectRepoLink");
-
-        if (project.liveUrl && project.liveUrl !== "#") {
-          liveLink.href = project.liveUrl;
-          liveLink.classList.remove("hidden");
-        } else {
-          liveLink.classList.add("hidden");
-        }
-
-        if (project.repoUrl && project.repoUrl !== "#") {
-          repoLink.href = project.repoUrl;
-          repoLink.classList.remove("hidden");
-        } else {
-          repoLink.classList.add("hidden");
-        }
-
-        renderMainMedia();
-        renderThumbs();
-
-        const modal = document.getElementById("projectModal");
-        const scrollArea = document.getElementById("projectModalScroll");
-
-        modal.classList.add("open");
-        modal.setAttribute("aria-hidden", "false");
-        scrollArea.scrollTop = 0;
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeProjectModal() {
-        const modal = document.getElementById("projectModal");
-        if (!modal.classList.contains("open")) return;
-
-        modal.classList.remove("open");
-        modal.setAttribute("aria-hidden", "true");
-
-        document.getElementById("projectMediaMain").innerHTML = "";
-        document.body.style.overflow = "";
-      }
-
-      navButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          goToSection(button.dataset.section);
-        });
-      });
-
-
-      const profileHover = document.querySelector(".profile-hover");
-
-      if (profileHover) {
-        profileHover.addEventListener("click", ( => {
-          profileHover.classList.toggle("is-enlarged");
-        }};
-
-
-      profileHover.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          profileHover.classList.toggle("is-enlarged");
-        }
-      });
-      }
-      
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          closeProjectModal();
-        }
-      });
-
-      window.goToSection = goToSection;
-      window.nextSection = nextSection;
-      window.prevSection = prevSection;
-      window.openProject = openProject;
-      window.closeProjectModal = closeProjectModal;
-      window.selectMedia = selectMedia;
-
-      renderProjectCards();
-      renderStack();
-      setNav();
+  renderProjectCards();
+  renderStack();
+  setNav();
     </script>
   </body>
 </html>
