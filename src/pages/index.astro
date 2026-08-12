@@ -417,18 +417,65 @@ import "../styles/global.css";
         box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.35);
       }
 
-      .form-status {
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-  min-height: 1.25rem;
+      .form-toast {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.6rem;
+  border-radius: 1.5rem;
+  background: rgba(8, 11, 23, 0.96);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(52, 211, 153, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 300ms ease,
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.form-status.ok {
+.form-toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.form-toast.error {
+  border-color: rgba(248, 113, 113, 0.45);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(248, 113, 113, 0.18);
+}
+
+.form-toast-icon {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 9999px;
+  background: rgba(52, 211, 153, 0.15);
   color: #6ee7b7;
+  font-weight: 800;
+  font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
-.form-status.error {
+.form-toast.error .form-toast-icon {
+  background: rgba(248, 113, 113, 0.15);
   color: #fca5a5;
+}
+
+.form-toast-text {
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
 }
 
       .project-modal {
@@ -1044,8 +1091,6 @@ import "../styles/global.css";
   >
     Send Message
   </button>
-
-  <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
 </form>
 
                   <div class="space-y-3">
@@ -1308,6 +1353,12 @@ import "../styles/global.css";
         </div>
       </div>
     </div>
+
+    <!-- Form success / error toast -->
+<div id="formToast" class="form-toast" role="status" aria-live="polite">
+  <span id="formToastIcon" class="form-toast-icon">✓</span>
+  <p id="formToastText" class="form-toast-text">Message sent!</p>
+</div>
 
     <script>
   const sampleVideo = "https://www.w3schools.com/html/mov_bbb.mp4";
@@ -1948,19 +1999,34 @@ import "../styles/global.css";
   });
 
   const contactForm = document.getElementById("contactForm");
+const formToast = document.getElementById("formToast");
+const formToastText = document.getElementById("formToastText");
+const formToastIcon = document.getElementById("formToastIcon");
+let toastTimer = null;
+
+function showToast(message, type) {
+  if (!formToast) return;
+
+  formToastText.textContent = message;
+  formToastIcon.textContent = type === "ok" ? "✓" : "!";
+  formToast.classList.toggle("error", type !== "ok");
+  formToast.classList.add("show");
+
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    formToast.classList.remove("show");
+  }, 4000);
+}
 
 if (contactForm) {
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const button = contactForm.querySelector('button[type="submit"]');
-    const status = document.getElementById("formStatus");
     const originalText = button.textContent;
 
     button.disabled = true;
     button.textContent = "Sending...";
-    status.textContent = "";
-    status.className = "form-status";
 
     try {
       const response = await fetch(contactForm.action, {
@@ -1971,15 +2037,12 @@ if (contactForm) {
 
       if (response.ok) {
         contactForm.reset();
-        status.textContent = "Message sent! I will get back to you soon.";
-        status.className = "form-status ok";
+        showToast("Message sent! I will get back to you soon.", "ok");
       } else {
-        status.textContent = "Something went wrong. Please try again or email me directly.";
-        status.className = "form-status error";
+        showToast("Something went wrong. Please try again or email me directly.", "error");
       }
     } catch (error) {
-      status.textContent = "Something went wrong. Please try again or email me directly.";
-      status.className = "form-status error";
+      showToast("Something went wrong. Please try again or email me directly.", "error");
     } finally {
       button.disabled = false;
       button.textContent = originalText;
