@@ -417,6 +417,20 @@ import "../styles/global.css";
         box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.35);
       }
 
+      .form-status {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  min-height: 1.25rem;
+}
+
+.form-status.ok {
+  color: #6ee7b7;
+}
+
+.form-status.error {
+  color: #fca5a5;
+}
+
       .project-modal {
         position: fixed;
         inset: 0;
@@ -1003,6 +1017,7 @@ import "../styles/global.css";
                   </div>
 
                   <form
+  id="contactForm"
   action="https://formspree.io/f/xzeprwlg"
   method="POST"
   class="space-y-3 mb-4"
@@ -1029,6 +1044,8 @@ import "../styles/global.css";
   >
     Send Message
   </button>
+
+  <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
 </form>
 
                   <div class="space-y-3">
@@ -1929,6 +1946,46 @@ import "../styles/global.css";
       goToSection(button.dataset.section);
     });
   });
+
+  const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const button = contactForm.querySelector('button[type="submit"]');
+    const status = document.getElementById("formStatus");
+    const originalText = button.textContent;
+
+    button.disabled = true;
+    button.textContent = "Sending...";
+    status.textContent = "";
+    status.className = "form-status";
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: "POST",
+        body: new FormData(contactForm),
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        contactForm.reset();
+        status.textContent = "Message sent! I will get back to you soon.";
+        status.className = "form-status ok";
+      } else {
+        status.textContent = "Something went wrong. Please try again or email me directly.";
+        status.className = "form-status error";
+      }
+    } catch (error) {
+      status.textContent = "Something went wrong. Please try again or email me directly.";
+      status.className = "form-status error";
+    } finally {
+      button.disabled = false;
+      button.textContent = originalText;
+    }
+  });
+}
 
   const profileHover = document.querySelector(".profile-hover");
 
